@@ -22,17 +22,21 @@ import Route from '@ioc:Adonis/Core/Route'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 Route.get('/', async ({ view, auth }) => {
-
   return view.render('welcome', {
     user: auth.user
   })
 }).middleware('auth')
 
-Route.post('/login', 'FusionAuthController.login');
-Route.get('/auth/login', 'FusionAuthController.authLogin');
-Route.get('/auth/callback', 'FusionAuthController.callback');
-Route.get('/auth/logout', 'FusionAuthController.logout');
-Route.get('/auth/getUser', 'FusionAuthController.getUser').middleware('auth');
+Route.group(() => {
+  Route.get('/login', 'FusionAuthController.authLogin');
+  Route.get('/callback', 'FusionAuthController.callback');
+  Route.get('/logout', 'FusionAuthController.logout');
+}).prefix('auth')
+
+Route.group(() => {
+  Route.get('/getUser', 'UserController.getUser')
+  Route.get('/listUsers', 'UserController.listUsers')
+}).prefix('user').middleware('auth')
 
 Route.get('*', async ({ view, auth }: HttpContextContract) => { 
   return view.render('index', {

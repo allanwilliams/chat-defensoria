@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 
 import { useChatContext } from '../../contexts/chat'
 import ChatCard from './ChatCard'
+import BuscaContato from './BuscaContato'
 
 
 export default function ChatList() {
@@ -12,8 +13,11 @@ export default function ChatList() {
           
           <header className="h-16 p-4 border-b border-gray-300 flex justify-between items-center bg-green-900 text-white">
             <h1 className="text-base font-semibold">Defensoria<br/>
-              <a href="/auth/logout">sair</a>
             </h1>
+            <div className='flex gap-4 items-center'>
+              <BuscaContato></BuscaContato>
+              <a href="/auth/logout">sair</a>  
+            </div>
           </header>
         
           

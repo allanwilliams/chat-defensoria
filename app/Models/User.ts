@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import Chat from './Chat'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -19,6 +20,14 @@ export default class User extends BaseModel {
 
   @column()
   public fusionauthUserId: string
+
+  @manyToMany(() => Chat, {
+    pivotTable: 'chat_users',
+  })
+  public chats: ManyToMany<typeof Chat>
+  
+  @column()
+  public socketId: string
   
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

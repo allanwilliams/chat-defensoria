@@ -4,23 +4,6 @@
   export default class FusionAuthController {
     constructor(private fusionAuthService) {}
 
-    public async login({ request, response }) {
-      const { email, password } = request.only(['email', 'password']);
-
-      try {
-        const user = await this.fusionAuthService.login(email, password);
-        return response.status(200).json({
-          message: 'Login bem-sucedido',
-          user,
-        });
-      } catch (error) {
-        return response.status(401).json({
-          message: 'Credenciais inválidas',
-          error: error.message,
-        });
-      }
-    }
-
     /**
      * Redireciona o usuário para o FusionAuth para login.
      */

@@ -6,6 +6,9 @@ export default class Mensagem extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public chatId: number 
+  
   @hasOne(()=> Chat)
   declare chat: HasOne<typeof Chat>
 
@@ -14,6 +17,9 @@ export default class Mensagem extends BaseModel {
 
   @column()
   public ack: number
+
+  @column()
+  public createdBy: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

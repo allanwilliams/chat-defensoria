@@ -5,6 +5,12 @@ export default class ChatUser extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public chatId: number
+
+  @column()
+  public userId: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

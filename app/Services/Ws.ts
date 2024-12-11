@@ -27,4 +27,4 @@ class Ws {
   }
 }
 
-export default new Ws()
+export default Ws
